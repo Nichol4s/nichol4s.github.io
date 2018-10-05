@@ -1,1 +1,24 @@
-This is an example
+<html>
+  Destination: <input type="text" id="target_field" />
+  <button id="submit_button">submit</button><button id="clear_button">clear</button>
+  <br/>
+  
+  <div id="result_box"></div>
+
+  
+  <script>
+    var window_count = 20;
+    submit_button.addEventListener('click', create_frames);
+    clear_button.addEventListener('click', function() { location.reload() })
+
+    function create_frames() {
+
+      for (var i = 0; i < window_count; i++) {
+        iframe = document.createElement('iframe')
+        iframe.src = target_field.value;
+        result_box.appendChild(iframe);
+      }
+    }    
+    </script>
+  
+</html>
