@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Surfly Queue Example</title>
+    <style>
+        html,body {
+            background-color: #023087;
+            -webkit-background-size: auto; /* For WebKit*/
+            -moz-background-size: auto;    /* Mozilla*/
+            -o-background-size: auto;      /* Opera*/
+            background-size: auto;         /* Generic*/
+        }
+
+        h1 {
+            color: white;
+            font-family: sans-serif;
+        }
+
+        #form {
+            margin-top: 100px;
+            border-radius: 25px;
+            background-color: white;
+            padding: 30px;
+            width: 400px;
+            height: 400px;
+
+        }
+
+        #sessidtarget {
+            position: relative;
+            color: #023087;
+            top: 100px;
+        }
+
+        .slabtexted {
+            margin-top: 100px;
+        }
+    </style>
+
+</head>
+
+<body class="slabtexted">
+
+    <center>
+        <h1>Surfly queue integration example</h1>
+        <div id="form">
+
+    <img itemprop="logo" src="https://www.farmers.com/content/dam/falcon/home-page-redesign/farmers_ins_logo.svg" alt="Surfly®" style="width: 125px; margin-top: 80px">
+
+                    <h2 id="sessidtarget" style="font-family: sans-serif;">Please wait...</h2>
+        </div>
+
+
+<script>
+(function(s,u,r,f,l,y){s[f]=s[f]||{init:function(){s[f].q=arguments}};
+l=u.createElement(r);y=u.getElementsByTagName(r)[0];l.async=1;
+l.src='https://surfly.com/surfly.js';y.parentNode.insertBefore(l,y);})
+(window,document,'script','Surfly');
+
+
+var settings={widgetkey:'0c17c102b943457a82838fe64a5a0a0d', hide_until_agent_joins: true, start_docked: true, follower_redirect_url: 'https://nichol4s.github.io/farmers.html'};
+window.addEventListener('DOMContentLoaded', function() {
+  Surfly.init(settings, function(init) {
+        if (init.success) {
+          if(!Surfly.currentSession){
+              Surfly.session()
+                .on('session_started', function(session, event) {
+                   // send the pin to the current session
+                   document.getElementById("sessidtarget").innerText = "Your session code is: "+ session.pin;
+                 })
+                .on('viewer_joined', function(session, event) {
+                    // if a viewer joins and they are the first then redirect to home page
+                    if(event.count==1){
+                      session.relocate("https://www.farmers.com/eFNOL/eFNOL_Login?SO=01");
+                    }
+                }).startLeader();
+          }
+        }
+   });
+});
+  </script>
+
+</body>
+</html>
+
+
