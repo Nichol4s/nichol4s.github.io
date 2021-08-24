@@ -1,1 +1,16 @@
-
+<object id="testapplet-object" 
+        classid="clsid:8AD9C840-044E-11D1-B3E9-00805F499D93"
+        width="256" height="256"
+        codebase="http://java.sun.com/update/1.6.0/jinstall-6u30-windows-i586.cab#Version=1,6,0,0">
+  <param name="archive" value="mytest.jar" />
+  <param name="code" value="my.package.MyClass" />
+  <param name="myParam" value="My Param Value" />
+  <embed id="testapplet-embed"
+         type="application/x-java-applet;version=1.6"
+         width="256" height="256" 
+         archive="mytest.jar"
+         code="my.package.MyClass" 
+         pluginspage="http://java.com/download/"
+         myParam="My Param Value" />
+  </embed>
+</object>
