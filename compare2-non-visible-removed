@@ -1,0 +1,27 @@
+<html>
+  
+ <head>
+   
+   <title>     Update your blog page.    </title>
+  </head>
+  
+  <body>
+     
+    <img src="https://images.unsplash.com/photo-1586042091284-bd35c8c1d917?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8M3x8fGVufDB8fHx8&auto=format&fit=crop&w=800&q=60">
+    <br/>
+    <a href="https://www.google.com/"> Search the web </a>
+    <br/>
+    <form action="https://www.server.com/" method="post">
+      <div>
+        <label for="title">Post title:</label>
+        <input type="text" id="title" name="title" value="My excellent blog post">
+      </div>
+      <div>
+        <button type="submit">Update post</button>
+      </div>
+     </form>
+    
+  </body>
+  
+
+</html>
