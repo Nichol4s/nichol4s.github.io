@@ -10,7 +10,7 @@
 window.addEventListener("load", function() {  
     document.querySelector(".c-quick-launcher").style.display = "none";
     const sheet = new CSSStyleSheet()
-    sheet.insertRule("#einleitung-video { background: red; animation: animateBgColor 15s ease-in infinite alternate;}");
+    sheet.insertRule("#einleitung-video { background: white; animation: animateBgColor 7s ease-in infinite alternate;}");
     sheet.insertRule("@keyframes animateBgColor { 25%   {background: #7cd3ce;}; 		50%   {background: #f3d600;}; 		75%   {background: #1cbbe3;}");
     document.adoptedStyleSheets = [ ...document.adoptedStyleSheets, sheet]
     document.getElementById('einleitung-video').style = "";
