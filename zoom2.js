@@ -9,7 +9,7 @@ var scripts = ["https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react.min.js"
 
 var ZOOM_VERSION = "2.4.0";
 var ZOOM_SDK = "F6bWIoWYuIMXFpHz1IkR5iUBP5pOqJhbHm71";
-var ZOOM_SIG = "RjZiV0lvV1l1SU1YRnBIejFJa1I1aVVCUDVwT3FKaGJIbTcxLjQyMzcyMzIzNzQuMTY1MjQ0ODU5MDQ2OS4wLnl5Uk5iUEdOSldRMG5Od09RQlU2Z1RQMVk4d0pzZWNlYzVrL3dESHBZU2c9";
+var ZOOM_SIG = "RjZiV0lvV1l1SU1YRnBIejFJa1I1aVVCUDVwT3FKaGJIbTcxLjQyMzcyMzIzNzQuMTY1MjQ0OTQzNTY5Ni4wLkJoY21jTjJwWFVRbHNnSURJODVybVBpa1NiWTdSUFd4aEpZRDlGbC9FSXc9";
 var ZOOM_MEETINGNO = "4237232374";
 
 
@@ -37,8 +37,10 @@ scripts.forEach(function(script)  {
 var newEl = document.createElement('div')
 newEl.setAttribute("id", "meetingSDKElement");
 bdy.appendChild(newEl);
-  
-    const client = ZoomMtgEmbedded.createClient();
+ 
+
+setTimeout( function() { 
+    const client = window.ZoomMtgEmbedded.createClient();
     let meetingSDKElement = document.getElementById('meetingSDKElement')
 
 client.init({
@@ -78,6 +80,7 @@ client.join({
   password: "",
   userName: "Nicholas"
 })
+}, 1000);
 
   
 } );
