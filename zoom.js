@@ -12,6 +12,10 @@ var ZOOM_SDK = "F6bWIoWYuIMXFpHz1IkR5iUBP5pOqJhbHm71";
 var ZOOM_SIG = "RjZiV0lvV1l1SU1YRnBIejFJa1I1aVVCUDVwT3FKaGJIbTcxLjQyMzcyMzIzNzQuMTY1MjQ0ODU5MDQ2OS4wLnl5Uk5iUEdOSldRMG5Od09RQlU2Z1RQMVk4d0pzZWNlYzVrL3dESHBZU2c9";
 var ZOOM_MEETINGNO = "4237232374";
 
+
+
+window.addEventListener("load", function() { 
+  
 var bdy = document.body;
 
 sheets.forEach(function(sheet) {
@@ -33,8 +37,7 @@ scripts.forEach(function(script)  {
 var newEl = document.createElement('div')
 newEl.setAttribute("id", "meetingSDKElement");
 bdy.appendChild(newEl);
-
-window.addEventListener("load", function() { 
+  
     const client = ZoomMtgEmbedded.createClient();
     let meetingSDKElement = document.getElementById('meetingSDKElement')
 
