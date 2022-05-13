@@ -8,8 +8,8 @@ var scripts = ["https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react.min.js"
                "https://source.zoom.us/{VERSION_NUMBER}/zoom-meeting-embedded-{VERSION_NUMBER}.min.js"]
 
 var ZOOM_VERSION = "2.4.0";
-var ZOOM_SDK = "1IO3TPm_RuyNZJeo4jq-iQ";
-var ZOOM_SIG = "MUlPM1RQbV9SdXlOWkplbzRqcS1pUS40MjM3MjMyMzc0LjE2NTI0NDY4NTMwNjAuMC54UFV1UktvdFloTG9kRkQyZ2lzQy9RMVJMMkxaOXNrS1hmbWlhSWw5Wk1ZPQ";
+var ZOOM_SDK = "F6bWIoWYuIMXFpHz1IkR5iUBP5pOqJhbHm71";
+var ZOOM_SIG = "RjZiV0lvV1l1SU1YRnBIejFJa1I1aVVCUDVwT3FKaGJIbTcxLjQyMzcyMzIzNzQuMTY1MjQ0ODU5MDQ2OS4wLnl5Uk5iUEdOSldRMG5Od09RQlU2Z1RQMVk4d0pzZWNlYzVrL3dESHBZU2c9";
 var ZOOM_MEETINGNO = "4237232374";
 
 var bdy = document.body;
