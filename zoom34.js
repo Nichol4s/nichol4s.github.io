@@ -9,12 +9,14 @@ var scripts = ["https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react.min.js"
 
 var ZOOM_VERSION = "2.4.0";
 var ZOOM_SDK = "1IO3TPm_RuyNZJeo4jq-iQ";
-var ZOOM_SIG = "MUlPM1RQbV9SdXlOWkplbzRqcS1pUS40MjM3MjMyMzc0LjE2NTI3MDA0NDI0MDMuMC5yaHZxUzJwdlZYeDdDWnQrcXRyMEQ4b3M2bG9IV2t5Vlg2dC9nbFFpdjBBPQ";
-var ZOOM_MEETINGNO = "4237232374";
+var ZOOM_MEETINGNO = 4237232374;
 
 
 
 window.addEventListener("load", function() { 
+
+               
+
   
 var bdy = document.body;
 
@@ -37,9 +39,18 @@ scripts.forEach(function(script)  {
 var newEl = document.createElement('div')
 newEl.setAttribute("id", "meetingSDKElement");
 bdy.appendChild(newEl);
- 
+  
 
-setTimeout( function() { 
+
+const postData = {'meetingNumber': 4237232374, 'role': 0};  
+fetch( "https://zoom-surfly-signature.herokuapp.com/", {
+        body: JSON.stringify(postData),
+        headers: {'Content-Type': 'application/json',},
+        method: "post"
+    }).then( (response) => { response.json().then(data => {
+                          
+var ZOOM_SIG = data.signature;      
+
     const client = window.ZoomMtgEmbedded.createClient();
     let meetingSDKElement = document.getElementById('meetingSDKElement')
 
@@ -72,7 +83,7 @@ client.init({
     }
   }
 })
-  
+console.log("Joining....: ", ZOOM_SDK, ZOOM_SIG, ZOOM_MEETINGNO);
 client.join({
   sdkKey: ZOOM_SDK,
   signature: ZOOM_SIG, // role in SDK Signature needs to be 0
@@ -85,4 +96,4 @@ client.join({
   
 } );
 
-
+});
