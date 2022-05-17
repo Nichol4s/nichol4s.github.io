@@ -95,22 +95,7 @@ client.join({
   userName: "Nicholas"
 })
   
-  client.join({
-  sdkKey: ZOOM_SDK,
-  signature: ZOOM_SIG,
-  password: "",
-  userName: "Nicholas"
-})
-  
-  
-  client.join({
-  sdkKey: ZOOM_SDK,
-  signature: ZOOM_SIG,
-  meetingNumber: ZOOM_MEETINGNO,
-  role: 0,
-  password: "",
-  userName: "Nicholas"
-})
+
 }, 1000);
 
   
