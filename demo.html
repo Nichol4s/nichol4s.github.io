@@ -44,7 +44,7 @@
 
      const client = window.ZoomMtgEmbedded.createClient();
      let meetingSDKElement = document.getElementById('meetingSDKElement')
-
+     window.setTimeout(function() { 
      client.init({
        debug: true,
        zoomAppRoot: meetingSDKElement,
@@ -85,6 +85,7 @@
   
      }).catch(error => console.log("Promise error: ", error));
    }).catch(error => console.log("Promise error: ", error));
+   }, 3000);
 
    </script>
    
