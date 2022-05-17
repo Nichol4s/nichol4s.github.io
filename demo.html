@@ -60,74 +60,64 @@
    <div id="meetingSDKElement"></div>
    
     <script>
-       var ZOOM_VERSION = "2.4.0";
-var ZOOM_SDK = "F6bWIoWYuIMXFpHz1IkR5iUBP5pOqJhbHm71";
-var ZOOM_MEETINGNO = 4237232374;
-var ZOOM_SIG;
+     var ZOOM_VERSION = "2.4.0";
+     var ZOOM_SDK = "F6bWIoWYuIMXFpHz1IkR5iUBP5pOqJhbHm71";
+     var ZOOM_MEETINGNO = 4237232374;
+     var ZOOM_SIG;
 
-
-
-
-  
-
-
-const postData = {'meetingNumber': 4237232374, 'role': 0};  
-fetch( "https://zoom-surfly-signature.herokuapp.com/", {
+     const postData = {'meetingNumber': 4237232374, 'role': 0};  
+     fetch( "https://zoom-surfly-signature.herokuapp.com/", {
         body: JSON.stringify(postData),
         headers: {'Content-Type': 'application/json','Accept': 'application/json'},
         method: "post"
-    }).then( (response) => { response.json().then(data => {
+     }).then( (response) => { response.json().then(data => {
 
-console.log("Data: ", data);
-var ZOOM_SIG = data.signature;      
+     console.log("Data: ", data);
+     var ZOOM_SIG = data.signature;      
 
-const client = window.ZoomMtgEmbedded.createClient();
-let meetingSDKElement = document.getElementById('meetingSDKElement')
+     const client = window.ZoomMtgEmbedded.createClient();
+     let meetingSDKElement = document.getElementById('meetingSDKElement')
 
-client.init({
-  debug: true,
-  zoomAppRoot: meetingSDKElement,
-  language: 'en-US',
-  customize: {
-    meetingInfo: [
-      'topic',
-      'host',
-      'mn',
-      'pwd',
-      'telPwd',
-      'invite',
-      'participant',
-      'dc',
-      'enctype',
-    ],
-    toolbar: {
-      buttons: [
-        {
-          text: 'Custom Button',
-          className: 'CustomButton',
-          onClick: () => {
-            console.log('custom button')
-          }
-        }
-      ]
-    }
-  }
-})
+     client.init({
+       debug: true,
+       zoomAppRoot: meetingSDKElement,
+       language: 'en-US',
+       customize: {
+         meetingInfo: [
+           'topic',
+           'host',
+           'mn',
+           'pwd',
+          'telPwd',
+           'invite',
+           'participant',
+           'dc',
+           'enctype',
+         ],
+         toolbar: {
+           buttons: [
+             {
+               text: 'Custom Button',
+               className: 'CustomButton',
+               onClick: () => {
+                 console.log('custom button')
+               }
+             }
+           ]
+         }
+       }
+     })
 
-client.join({
-  sdkKey: ZOOM_SDK,
-  signature: ZOOM_SIG,
-  meetingNumber: ZOOM_MEETINGNO,
-  password: "",
-  userName: "Nicholas"
-})
+     client.join({
+       sdkKey: ZOOM_SDK,
+       signature: ZOOM_SIG,
+       meetingNumber: ZOOM_MEETINGNO,
+       password: "",
+       userName: "Nicholas"
+     })
   
-
-
-  
-} );
-
-});
+     });
+   });
    </script>
    
 </body>
