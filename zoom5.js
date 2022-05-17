@@ -1,12 +1,12 @@
 /*SURFLY_KEEP */
-var sheets = ["https://source.zoom.us/{VERSION_NUMBER}/css/bootstrap.css?SURFLY_KEEP", 
-              "https://source.zoom.us/{VERSION_NUMBER}/css/react-select.css?SURFLY_KEEP"]
-var scripts = ["https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react.min.js?SURFLY_KEEP", 
-               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react-dom.min.js?SURFLY_KEEP", 
-               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/redux.min.js?SURFLY_KEEP",
-               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/redux-thunk.min.js?SURFLY_KEEP",
-               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/lodash.min.js?SURFLY_KEEP",
-               "https://source.zoom.us/{VERSION_NUMBER}/zoom-meeting-embedded-{VERSION_NUMBER}.min.js?SURFLY_KEEP"]
+var sheets = ["https://source.zoom.us/{VERSION_NUMBER}/css/bootstrap.css?SURFLY_KEEP=1", 
+              "https://source.zoom.us/{VERSION_NUMBER}/css/react-select.css?SURFLY_KEEP=1"]
+var scripts = ["https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react.min.js?SURFLY_KEEP=1", 
+               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react-dom.min.js?SURFLY_KEEP=1", 
+               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/redux.min.js?SURFLY_KEEP=1",
+               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/redux-thunk.min.js?SURFLY_KEEP=1",
+               "https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/lodash.min.js?SURFLY_KEEP=1",
+               "https://source.zoom.us/{VERSION_NUMBER}/zoom-meeting-embedded-{VERSION_NUMBER}.min.js?SURFLY_KEEP=1"]
 
 var ZOOM_VERSION = "2.4.0";
 var ZOOM_SDK = "F6bWIoWYuIMXFpHz1IkR5iUBP5pOqJhbHm71";
