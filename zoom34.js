@@ -1,3 +1,4 @@
+/*SURFLY_KEEP */
 var sheets = ["https://source.zoom.us/{VERSION_NUMBER}/css/bootstrap.css", 
               "https://source.zoom.us/{VERSION_NUMBER}/css/react-select.css"]
 var scripts = ["https://source.zoom.us/{VERSION_NUMBER}/lib/vendor/react.min.js", 
