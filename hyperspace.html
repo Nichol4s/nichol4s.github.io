@@ -23,9 +23,8 @@
 </div>
 </div>
 
-
 <style>
-.wall{
+  .wall{
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/18515/PIA09959-1280x800_copy.jpg);
   background-size: cover;
 }
@@ -39,6 +38,13 @@ html, body{
 body{
   background: #000;
   text-align: center;
+}
+
+body:before{
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
 }
 
 #fixed { 
@@ -62,13 +68,6 @@ body{
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
   color: white;
-}  
-  
-body:before{
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
 }
 
 .scene{
@@ -152,7 +151,7 @@ body:before{
     opacity: 0;
   }
 }
-</style>
+
 
 
 
@@ -216,3 +215,5 @@ body:before{
   }
 } 
 */
+
+</style>
