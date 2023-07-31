@@ -1,6 +1,6 @@
 if (window.location.host == "checkout.xola.com") {
 
-  window.addEventListener("load", function(event) {
+  window.addEventListener("load", function(event) { window.setTimeout( function() { 
   
     var submit_button = document.getElementsByClassName('action-submit')[0]
     if (submit_button) {
@@ -34,5 +34,5 @@ if (window.location.host == "checkout.xola.com") {
       new_row.appendChild(new_label)
       contact_info_container.appendChild(new_row)
     }
-  });
+  }, 4000)});
 }
