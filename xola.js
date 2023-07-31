@@ -1,6 +1,6 @@
 if (window.location.host == "checkout.xola.com") {
 
-  document.addEventListener("DOMContentLoaded", function(event) {
+  window.addEventListener("load", function(event) {
   
     var submit_button = document.getElementsByClassName('action-submit')[0]
     if (submit_button) {
