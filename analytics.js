@@ -41,8 +41,8 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventType: eventType,
                     eventName: eventName
                 };
-                console.log(eventDetails);
-                SurflySession.log(eventDetails);
+                console.log("SSS!! -> ",eventDetails);
+                if (Surfly && Surfly.currentSession) Surlfy.currentSession.log(eventDetails);
             }
 
             // Forward the call to the original function
