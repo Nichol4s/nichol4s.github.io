@@ -136,7 +136,6 @@ function initInterceptors() {
 // Initialize interceptors after document loads
 // window.addEventListener('load', initInterceptors);
 function monitorWebpage(configs) {
-    console.log("!!!S monitoring the web page!", window.location.href);
     // Create a map to store interval IDs for each domain
     const intervalMap = new Map();
 
