@@ -143,20 +143,24 @@ function methodInterceptor(target, config, platform) {
     });
 }
 
-
-analyticsConfig.forEach(config => {
-    //if (window[config.name] && window[config.name].__surfly_source_origin === config.domain) {
-    if (window[config.name]) {
-        if (config.methods) {
-            for (let method in config.methods) {
-                if (typeof window[config.name] === 'function' && window[config.name][config.methods[method].methodName]) {
-                    window[config.name][config.methods[method].methodName] = methodInterceptor(window[config.name][config.methods[method].methodName], config.methods[method], config.name);
-                } else if (typeof window[config.name] === 'object' && window[config.name].push) {
-                    // Handling analytics tools that use array-like structures, e.g., _paq for Matomo
-                    window[config.name].push = methodInterceptor(window[config.name].push, config.methods[method], config.name);
+document.addEventListener('load', function () {
+    analyticsConfig.forEach(config => {
+        //if (window[config.name] && window[config.name].__surfly_source_origin === config.domain) {
+        console.log("SSS -> Checking for", config.name);
+        if (window[config.name]) {
+            if (config.methods) {
+                for (let method in config.methods) {
+                    if (typeof window[config.name] === 'function' && window[config.name][config.methods[method].methodName]) {
+                        console.log("SSS ---> appyling function");
+                        window[config.name][config.methods[method].methodName] = methodInterceptor(window[config.name][config.methods[method].methodName], config.methods[method], config.name);
+                    } else if (typeof window[config.name] === 'object' && window[config.name].push) {
+                        // Handling analytics tools that use array-like structures, e.g., _paq for Matomo
+                        console.log("SSS ---> appyling object");
+                        window[config.name].push = methodInterceptor(window[config.name].push, config.methods[method], config.name);
+                    }
                 }
             }
         }
-    }
+    });
 });
 
