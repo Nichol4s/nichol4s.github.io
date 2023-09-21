@@ -42,7 +42,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventName: eventName
                 };
                 console.log("SSS!! -> ",eventDetails);
-                if (Surfly && Surfly.currentSession) Surlfy.currentSession.log(eventDetails);
+                if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
 
             // Forward the call to the original function
