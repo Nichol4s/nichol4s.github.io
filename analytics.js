@@ -82,10 +82,9 @@ function monitorWebpage(configs) {
                     if (node.nodeName === 'SCRIPT') {
                         for (let config of configs) {
                             const { functionName, domain, callback } = config;
-                            console.log("SSS!! Looking for: ", node.src, domain, node.src.includes(domain), intervalMap.has(domain))
                             if (node.src.includes(domain) && !intervalMap.has(domain)) {
                                 // Start polling for the function
-                                console.log("SSS! Match for", domain)
+                                console.log("SSS! Match for", domain, functionName)
                                 const intervalId = setInterval(() => {
                                     if (window[functionName]) {
                                         clearInterval(intervalId);
