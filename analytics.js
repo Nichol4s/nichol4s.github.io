@@ -54,6 +54,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
 function initInterceptors() {
     analyticsConfig.forEach(config => {
         if (window[config.name]) {
+            console.log("SSS! Patching... ", config.name);
             window[config.name] = createMethodInterceptor(window[config.name], config.intercept, config.name);
         }
     });
