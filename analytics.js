@@ -143,7 +143,7 @@ function methodInterceptor(target, config, platform) {
     });
 }
 
-document.addEventListener('load', function () {
+window.addEventListener('load', function () {
     analyticsConfig.forEach(config => {
         //if (window[config.name] && window[config.name].__surfly_source_origin === config.domain) {
         console.log("SSS -> Checking for", config.name);
