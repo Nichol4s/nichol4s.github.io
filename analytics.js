@@ -80,12 +80,12 @@ function monitorWebpage(configs) {
             if (mutation.type === 'childList') {
                 for (let node of mutation.addedNodes) {
                     if (node.nodeName === 'SCRIPT') {
-                        console.log("New SCRIPT added: ", node.src);
                         for (let config of configs) {
                             const { functionName, domain, callback } = config;
-                            console.log("SSS!! Looking for: ", config)
+                            console.log("SSS!! Looking for: ", config, domain)
                             if (node.src.includes(domain) && !intervalMap.has(domain)) {
                                 // Start polling for the function
+                                console.log("SSS! Match for", domain)
                                 const intervalId = setInterval(() => {
                                     if (window[functionName]) {
                                         clearInterval(intervalId);
