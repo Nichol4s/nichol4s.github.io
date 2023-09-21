@@ -47,7 +47,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventType: eventType,
                     eventName: eventName
                 };
-                console.log("SSS!! ->",eventDetails);
+                console.log("!!XXXXXXXXX!! ->",eventDetails);
                 if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
 
@@ -58,10 +58,8 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
 }
 
 function initInterceptors() {
-    console.log("SSS! Initializing2");
     analyticsConfig.forEach(config => {
         if (window[config.funcName]) {
-            console.log("SSS! Patching... ", config.funcName);
             window[config.funcName] = createMethodInterceptor(window[config.funcName], config.intercept, config.funcName);
         }
     });
