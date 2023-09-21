@@ -144,6 +144,7 @@ function methodInterceptor(target, config, platform) {
 }
 
 window.addEventListener('load', function () {
+    console.log("SSS LOAD");
     analyticsConfig.forEach(config => {
         //if (window[config.name] && window[config.name].__surfly_source_origin === config.domain) {
         console.log("SSS -> Checking for", config.name);
