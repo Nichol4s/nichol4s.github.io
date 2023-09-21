@@ -80,7 +80,7 @@ function monitorWebpage(configs) {
             if (mutation.type === 'childList') {
                 for (let node of mutation.addedNodes) {
                     if (node.nodeName === 'SCRIPT') {
-                        console.log("New SCRIPT added: ", node);
+                        console.log("New SCRIPT added: ", node.src);
                         for (let config of configs) {
                             const { functionName, domain, callback } = config;
                             if (node.src.includes(domain) && !intervalMap.has(domain)) {
