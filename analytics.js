@@ -32,6 +32,42 @@ const analyticsConfigs = [
             eventType: (args) => args[0] === 'track' && args[1] === 'page view' ? 'page' : 'event',
             eventName: (args) => args[0] === 'track' ? args[2]['Page Name'] : args[1]
         }
+    },
+    {
+        funcName: 's',  // Adobe Analytics (Omniture)
+        domain: 'www.adobe.com',
+        intercept: {
+            eventType: (args) => args[0] === 't' ? 'page' : null,
+            eventName: (args) => location.href
+        }
+    },
+    {
+        funcName: 'amplitude',  // Amplitude
+        domain: 'cdn.amplitude.com',
+        intercept: {
+            eventType: (args) => args[0] === 'logEvent' ? 'event' : null,
+            eventName: (args) => args[1]
+        }
+    },
+    {
+        funcName: 'heap',  // Heap
+        domain: 'cdn.heapanalytics.com',
+        intercept: {
+            eventType: (args) => args[0] === 'track' ? 'event' : null,
+            eventName: (args) => args[1]
+        }
+    },
+    {
+        funcName: '_paq',  // Matomo (formerly Piwik)
+        domain: 'cdn.matomo.cloud',
+        intercept: {
+            eventType: (args) => {
+                if (args[0] === 'trackPageView') return 'page';
+                if (args[0] === 'trackEvent') return 'event';
+                return null;
+            },
+            eventName: (args) => args[1]
+        }
     }
 ];
 
