@@ -1,4 +1,4 @@
-const analyticsConfig = [
+const analyticsConfigs = [
     {
         name: 'ga',  // Google Universal Analytics
         domain: 'www.google-analytics.com',
