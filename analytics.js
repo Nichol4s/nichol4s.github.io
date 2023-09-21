@@ -1,3 +1,4 @@
+//
 const analyticsConfigs = [
     {
         name: 'ga',  // Google Universal Analytics
