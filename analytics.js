@@ -69,6 +69,7 @@ function initInterceptors() {
 // Initialize interceptors after document loads
 // window.addEventListener('load', initInterceptors);
 function monitorWebpage(configs) {
+    console.log("!!!S monitoring the web page!");
     // Create a map to store interval IDs for each domain
     const intervalMap = new Map();
 
@@ -101,7 +102,7 @@ function monitorWebpage(configs) {
     });
 
     // Start observing the document with the configured parameters
-    observer.observe(document, {
+    observer.observe(window.document, {
         childList: true,
         subtree: true
     });
