@@ -83,6 +83,7 @@ function monitorWebpage(configs) {
                         console.log("New SCRIPT added: ", node.src);
                         for (let config of configs) {
                             const { functionName, domain, callback } = config;
+                            console.log("SSS!! Looking for: ", config)
                             if (node.src.includes(domain) && !intervalMap.has(domain)) {
                                 // Start polling for the function
                                 const intervalId = setInterval(() => {
