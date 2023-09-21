@@ -52,7 +52,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
 }
 
 function initInterceptors() {
-    console.log("SSS! Initializing");
+    console.log("SSS! Initializing2");
     analyticsConfig.forEach(config => {
         if (window[config.name]) {
             console.log("SSS! Patching... ", config.name);
