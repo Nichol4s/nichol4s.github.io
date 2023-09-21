@@ -179,6 +179,6 @@ const intervalID = setInterval(() => {
     if (allFound) {
         clearInterval(intervalID);
     }
-}, 100); // Check every 100 ms.
+}, 1000); // Check every 1000 ms.
 
 
