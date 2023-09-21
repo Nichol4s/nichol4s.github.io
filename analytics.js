@@ -1,7 +1,7 @@
 //
 const analyticsConfigs = [
     {
-        name: 'ga',  // Google Universal Analytics
+        funcName: 'ga',  // Google Universal Analytics
         domain: 'www.google-analytics.com',
         intercept: {
             eventType: (args) => (args[0] === 'send' && (args[1] === 'pageview' || args[1] === 'event')) ? args[1] : null,
@@ -9,7 +9,7 @@ const analyticsConfigs = [
         }
     },
     {
-        name: 'gtag',  // Google Analytics (GA4)
+        funcName: 'gtag',  // Google Analytics (GA4)
         domain: 'www.googletagmanager.com',
 
         intercept: {
@@ -18,7 +18,7 @@ const analyticsConfigs = [
         }
     },
     {
-        name: 'analytics',  // Segment
+        funcName: 'analytics',  // Segment
         domain: 'cdn.segment.com',
         intercept: {
             eventType: (args) => (args[0] === 'page' || args[0] === 'track') ? args[0] : null,
@@ -26,7 +26,7 @@ const analyticsConfigs = [
         }
     },
     {
-        name: 'mixpanel',  // Mixpanel
+        funcName: 'mixpanel',  // Mixpanel
         domain: 'cdn.mxpnl.com',
         intercept: {
             eventType: (args) => args[0] === 'track' && args[1] === 'page view' ? 'page' : 'event',
@@ -60,9 +60,9 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
 function initInterceptors() {
     console.log("SSS! Initializing2");
     analyticsConfig.forEach(config => {
-        if (window[config.name]) {
-            console.log("SSS! Patching... ", config.name);
-            window[config.name] = createMethodInterceptor(window[config.name], config.intercept, config.name);
+        if (window[config.funcName]) {
+            console.log("SSS! Patching... ", config.funcName);
+            window[config.funcName] = createMethodInterceptor(window[config.funcName], config.intercept, config.funcName);
         }
     });
 }
@@ -81,12 +81,12 @@ function monitorWebpage(configs) {
                 for (let node of mutation.addedNodes) {
                     if (node.nodeName === 'SCRIPT') {
                         for (let config of configs) {
-                            const { functionName, domain, callback } = config;
+                            const { funcName, domain, callback } = config;
                             if (node.src.includes(domain) && !intervalMap.has(domain)) {
                                 // Start polling for the function
-                                console.log("SSS! Match for", domain, functionName)
+                                console.log("SSS! Match for", domain, funcName)
                                 const intervalId = setInterval(() => {
-                                    if (window[functionName]) {
+                                    if (window[funcName]) {
                                         clearInterval(intervalId);
                                         intervalMap.delete(domain);
                                         console.log("!!! Callback for: ", domain);
