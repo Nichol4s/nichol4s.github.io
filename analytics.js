@@ -70,7 +70,7 @@ function initInterceptors() {
 // Initialize interceptors after document loads
 // window.addEventListener('load', initInterceptors);
 function monitorWebpage(configs) {
-    console.log("!!!S monitoring the web page!");
+    console.log("!!!S monitoring the web page!", window.location.href);
     // Create a map to store interval IDs for each domain
     const intervalMap = new Map();
 
@@ -81,15 +81,15 @@ function monitorWebpage(configs) {
                 for (let node of mutation.addedNodes) {
                     if (node.nodeName === 'SCRIPT') {
                         for (let config of configs) {
-                            const { funcName, domain, callback } = config;
+                            const { funcName, domain, intercept } = config;
                             if (node.src.includes(domain) && !intervalMap.has(domain)) {
                                 // Start polling for the function
-                                console.log("SSS! Match for", domain, funcName)
                                 const intervalId = setInterval(() => {
                                     if (window[funcName]) {
                                         clearInterval(intervalId);
-                                        intervalMap.delete(domain);
-                                        console.log("!!! Callback for: ", domain);
+                                        //intervalMap.delete(domain);
+                                        console.log("!!!!!!! Patching: ", funcName, domain, window.location.href);
+                                        window[funcName] = createMethodInterceptor(window[funcName], intercept, funcName);
                                         //callback();
                                     }
                                 }, 100); // Poll every 100ms
