@@ -68,6 +68,38 @@ const analyticsConfigs = [
             },
             eventName: (args) => args[1]
         }
+    },
+    {
+        funcName: 'KM',
+        domain: 'scripts.kissmetrics.com',
+        intercept: {
+            eventType: (args) => args[0] === 'record' ? 'event' : null,
+            eventName: (args) => args[1]
+        }
+    },
+    {
+        funcName: 'clicky',
+        domain: 'static.getclicky.com',
+        intercept: {
+            eventType: (args) => args[0] === 'log' ? 'event' : null,
+            eventName: (args) => args[1]
+        }
+    },
+    {
+        funcName: 'optimizely',
+        domain: 'cdn.optimizely.com',
+        intercept: {
+            eventType: (args) => args[0] === 'push' ? 'event' : null, // Might need refinement based on the type of push events
+            eventName: (args) => typeof args[1] === 'object' && args[1].type ? args[1].type : null // Assuming the event details are in the second argument
+        }
+    },
+    {
+        funcName: 'woopra',
+        domain: 'static.woopra.com',
+        intercept: {
+            eventType: (args) => args[0] === 'track' ? 'event' : null,
+            eventName: (args) => args[1]
+        }
     }
 ];
 
