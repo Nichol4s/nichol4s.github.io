@@ -61,4 +61,4 @@ function initInterceptors() {
 }
 
 // Initialize interceptors after document loads
-document.addEventListener('DOMContentLoaded', initInterceptors);
+document.addEventListener('load', initInterceptors);
