@@ -107,7 +107,7 @@ const analyticsConfig = [
 
 
 function methodInterceptor(target, config, platform) {
-    const proxy = new Proxy(target, {
+    return new Proxy(target, {
         apply: function (target, thisArg, argumentsList) {
             let eventDetails = {
                 platform: platform,
@@ -141,44 +141,26 @@ function methodInterceptor(target, config, platform) {
             return Reflect.apply(target, thisArg, argumentsList);
         }
     });
-    proxy.__isIntercepted = true; 
-    return proxy;
 }
 
-
-function isAlreadyIntercepted(fn) {
-    return !!fn.__isIntercepted;
-}
-
-const intervalID = setInterval(() => {
-    let allFound = true; // To check if we've found all analytics tools.
-
+window.addEventListener('load', function () {
+    console.log("SSS LOAD");
     analyticsConfig.forEach(config => {
-        if (!window[config.name] || (window[config.name] && window[config.name].__isIntercepted)) {
-            allFound = false;
-            return;
-        }
-        
+        //if (window[config.name] && window[config.name].__surfly_source_origin === config.domain) {
         console.log("SSS -> Checking for", config.name);
-        
-        if (config.methods) {
-            for (let method in config.methods) {
-                if (typeof window[config.name] === 'function' && window[config.name][config.methods[method].methodName] && !isAlreadyIntercepted(window[config.name][config.methods[method].methodName])) {
-                    console.log("SSS ---> applying function");
-                    window[config.name][config.methods[method].methodName] = methodInterceptor(window[config.name][config.methods[method].methodName], config.methods[method], config.name);
-                } else if (typeof window[config.name] === 'object' && window[config.name].push && !isAlreadyIntercepted(window[config.name].push)) {
-                    // Handling analytics tools that use array-like structures, e.g., _paq for Matomo
-                    console.log("SSS ---> applying object");
-                    window[config.name].push = methodInterceptor(window[config.name].push, config.methods[method], config.name);
+        if (window[config.name]) {
+            if (config.methods) {
+                for (let method in config.methods) {
+                    if (typeof window[config.name] === 'function' && window[config.name][config.methods[method].methodName]) {
+                        console.log("SSS ---> appyling function");
+                        window[config.name][config.methods[method].methodName] = methodInterceptor(window[config.name][config.methods[method].methodName], config.methods[method], config.name);
+                    } else if (typeof window[config.name] === 'object' && window[config.name].push) {
+                        // Handling analytics tools that use array-like structures, e.g., _paq for Matomo
+                        console.log("SSS ---> appyling object");
+                        window[config.name].push = methodInterceptor(window[config.name].push, config.methods[method], config.name);
+                    }
                 }
             }
         }
     });
-
-    // If we've found all the analytics tools, clear the interval.
-    if (allFound) {
-        clearInterval(intervalID);
-    }
-}, 1000); // Check every 1000 ms.
-
-
+});
