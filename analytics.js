@@ -15,7 +15,8 @@ const analyticsConfigs = [
 
         intercept: {
             eventType: (args) => args[0] === 'event' ? 'event' : null,
-            eventName: (args) => args[1]
+            eventName: (args) => args[1],
+            eventList: (args) => args
         }
     },
     {
@@ -122,7 +123,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventType: eventType,
                     eventName: eventName
                 };
-                prettyLog(eventDetails.platform, eventDetails.eventType, eventDetails.eventName, eventDetails.eventList)
+                prettyLog(eventDetails.platform, eventDetails.eventType, eventDetails.eventName, argumentsList)
                 //console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName + "->"+eventDetails.eventList + "<-"+window.location.href, "background-color: green; color:white");
                 if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
@@ -134,7 +135,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
 }
 
 function initInterceptors() {
-    analyticsConfig.forEach(config => {
+    analyticsConfigs.forEach(config => {
         if (window[config.funcName]) {
             window[config.funcName] = createMethodInterceptor(window[config.funcName], config.intercept, config.funcName);
         }
@@ -183,4 +184,4 @@ function monitorWebpage(configs) {
 }
 
 monitorWebpage(analyticsConfigs);
-
+if (window['ga']) initInterceptors();
