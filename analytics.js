@@ -105,8 +105,8 @@ const analyticsConfigs = [
 ];
 
 function prettyLog(ePlatform, eType, eName, eList) {
-    console.log("%c !!EVENT!! " + ePlatform + " " eType + " " + eName, "background-color: green; color:white");
-    console.log("%c           " + List, "background-color: green; color:white");
+    console.log("%c !!EVENT!! " + ePlatform + " " + eType + " " + eName, "background-color: green; color:white");
+    console.log("%c           " + eList, "background-color: green; color:white");
     console.log("%c           " + window.location.href, "background-color: green; color:white");
 }
 
