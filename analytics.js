@@ -5,7 +5,8 @@ const analyticsConfigs = [
         domain: 'www.google-analytics.com',
         intercept: {
             eventType: (args) => (args[0] === 'send' && (args[1] === 'pageview' || args[1] === 'event')) ? args[1] : null,
-            eventName: (args) => args[1] === 'pageview' ? location.href : (args[1] === 'event' ? args[2] : null)
+            eventName: (args) => args[1] === 'pageview' ? location.href : (args[1] === 'event' ? args[2] : null),
+            eventList: (args) => args
         }
     },
     {
@@ -115,7 +116,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventType: eventType,
                     eventName: eventName
                 };
-                console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName, "background-color: green; color:white");
+                console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName + "->"+eventDetails.eventList, "background-color: green; color:white");
                 if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
 
