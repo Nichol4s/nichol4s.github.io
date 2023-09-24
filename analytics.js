@@ -104,6 +104,12 @@ const analyticsConfigs = [
     }
 ];
 
+function prettyLog(ePlatform, eType, eName, eList) {
+    console.log("%c !!EVENT!! " + ePlatform + " " eType + " " + eName, "background-color: green; color:white");
+    console.log("%c           " + List, "background-color: green; color:white");
+    console.log("%c           " + window.location.href, "background-color: green; color:white");
+}
+
 function createMethodInterceptor(originalFn, methodConfig, platformName) {
     return new Proxy(originalFn, {
         apply: function(target, thisArg, argumentsList) {
@@ -116,7 +122,8 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventType: eventType,
                     eventName: eventName
                 };
-                console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName + "->"+eventDetails.eventList, "background-color: green; color:white");
+                prettyLog(eventDetails.platform, eventDetails.eventType, eventDetails.eventName, enentDetails.eventList)
+                //console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName + "->"+eventDetails.eventList + "<-"+window.location.href, "background-color: green; color:white");
                 if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
 
