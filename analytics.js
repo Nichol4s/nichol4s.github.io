@@ -122,7 +122,7 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
                     eventType: eventType,
                     eventName: eventName
                 };
-                prettyLog(eventDetails.platform, eventDetails.eventType, eventDetails.eventName, enentDetails.eventList)
+                prettyLog(eventDetails.platform, eventDetails.eventType, eventDetails.eventName, eventDetails.eventList)
                 //console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName + "->"+eventDetails.eventList + "<-"+window.location.href, "background-color: green; color:white");
                 if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
