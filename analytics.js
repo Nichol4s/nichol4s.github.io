@@ -6,7 +6,7 @@ const analyticsConfigs = [
         intercept: {
             eventType: (args) => (args[0] === 'send' && (args[1] === 'pageview' || args[1] === 'event')) ? args[1] : null,
             eventName: (args) => args[1] === 'pageview' ? location.href : (args[1] === 'event' ? args[2] : null),
-            eventList: (args) => args
+            eventList: (args) => args[2]
         }
     },
     {
@@ -16,7 +16,7 @@ const analyticsConfigs = [
         intercept: {
             eventType: (args) => args[0] === 'event' ? 'event' : null,
             eventName: (args) => args[1],
-            eventList: (args) => args
+            eventList: (args) => args[2]
         }
     },
     {
@@ -105,10 +105,14 @@ const analyticsConfigs = [
     }
 ];
 
-function prettyLog(ePlatform, eType, eName, eList) {
-    console.log("%c !!EVENT!! " + ePlatform + " " + eType + " " + eName, "background-color: green; color:white");
-    console.log("%c           " + eList, "background-color: green; color:white");
-    console.log("%c           " + window.location.href, "background-color: green; color:white");
+const lookupMap = analyticsConfigs.reduce((acc, config) => {
+    acc[config.funcName] = config;
+    return acc;
+}, {});
+
+function prettyLog(ed) {
+    console.log("%c !!EVENT!! " + ed.platform + " " + ed.eventType + " " + ed.eventName, "background-color: red; color:white");
+    console.log(ed.eventList);
 }
 
 function createMethodInterceptor(originalFn, methodConfig, platformName) {
@@ -116,24 +120,52 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
         apply: function(target, thisArg, argumentsList) {
             let eventType = methodConfig.eventType(argumentsList);
             let eventName = methodConfig.eventName(argumentsList);
+            let eventList = methodConfig.eventList(argumentsList);
 
             if (eventType && eventName) {
                 let eventDetails = {
                     platform: platformName,
                     eventType: eventType,
-                    eventName: eventName
+                    eventName: eventName,
+                    eventList: eventList
                 };
-                prettyLog(eventDetails.platform, eventDetails.eventType, eventDetails.eventName, argumentsList)
-                //console.log("%c !!X!! -> " + eventDetails.platform + " " + eventDetails.eventType + ":"+ eventDetails.eventName + "->"+eventDetails.eventList + "<-"+window.location.href, "background-color: green; color:white");
+                prettyLog(eventDetails)
                 if (window['Surfly'] && Surfly.currentSession) Surfly.currentSession.log(eventDetails);
             }
 
             // Forward the call to the original function
             return Reflect.apply(target, thisArg, argumentsList);
-        }
+        },
+        
     });
 }
 
+
+function createGlobalProxies(lookupMap) {
+    console.log("!!!!!! ceating Global Proxies", )
+    window = new Proxy(window, {
+      set: function(target, property, value) {
+        console.log("HIT!", property, value)
+        // Check if the property is in the lookupMap
+        if (lookupMap[property]) {
+          // If the property is being set, wrap the new value in a Proxy
+          console.log("------> creating GLOBAL proxy: ", property)
+          value = createMethodInterceptor(value, lookupMap[property].intercept, property);
+        }
+        target[property] = value;
+        return true;
+      },
+      get: function(target, property) {
+        return target[property];
+      }
+    });
+  }
+  
+  // Usage
+  createGlobalProxies(lookupMap);
+  
+
+/*
 function initInterceptors() {
     analyticsConfigs.forEach(config => {
         if (window[config.funcName]) {
@@ -141,6 +173,8 @@ function initInterceptors() {
         }
     });
 }
+debugger;
+console.log("end of file...")
 
 // Initialize interceptors after document loads
 // window.addEventListener('load', initInterceptors);
@@ -185,3 +219,4 @@ function monitorWebpage(configs) {
 
 monitorWebpage(analyticsConfigs);
 if (window['ga']) initInterceptors();
+*/
