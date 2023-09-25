@@ -24,7 +24,9 @@ const analyticsConfigs = [
         domain: 'cdn.segment.com',
         intercept: {
             eventType: (args) => (args[0] === 'page' || args[0] === 'track') ? args[0] : null,
-            eventName: (args) => args[1]
+            eventName: (args) => args[1],
+            eventList: (args) => args[2]
+
         }
     },
     {
@@ -32,7 +34,9 @@ const analyticsConfigs = [
         domain: 'cdn.mxpnl.com',
         intercept: {
             eventType: (args) => args[0] === 'track' && args[1] === 'page view' ? 'page' : 'event',
-            eventName: (args) => args[0] === 'track' ? args[2]['Page Name'] : args[1]
+            eventName: (args) => args[0] === 'track' ? args[2]['Page Name'] : args[1],
+            eventList: (args) => args[2]
+
         }
     },
     {
