@@ -141,31 +141,6 @@ function createMethodInterceptor(originalFn, methodConfig, platformName) {
 }
 
 
-function createGlobalProxies(lookupMap) {
-    console.log("!!!!!! ceating Global Proxies", )
-    window = new Proxy(window, {
-      set: function(target, property, value) {
-        console.log("HIT!", property, value)
-        // Check if the property is in the lookupMap
-        if (lookupMap[property]) {
-          // If the property is being set, wrap the new value in a Proxy
-          console.log("------> creating GLOBAL proxy: ", property)
-          value = createMethodInterceptor(value, lookupMap[property].intercept, property);
-        }
-        target[property] = value;
-        return true;
-      },
-      get: function(target, property) {
-        return target[property];
-      }
-    });
-  }
-  
-  // Usage
-  createGlobalProxies(lookupMap);
-  
-
-/*
 function initInterceptors() {
     analyticsConfigs.forEach(config => {
         if (window[config.funcName]) {
@@ -173,8 +148,6 @@ function initInterceptors() {
         }
     });
 }
-debugger;
-console.log("end of file...")
 
 // Initialize interceptors after document loads
 // window.addEventListener('load', initInterceptors);
@@ -218,5 +191,4 @@ function monitorWebpage(configs) {
 }
 
 monitorWebpage(analyticsConfigs);
-if (window['ga']) initInterceptors();
-*/
+initInterceptors();
