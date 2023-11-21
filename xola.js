@@ -1,4 +1,4 @@
-if (window.location.host == "checkout.xola.com") {
+if (window.location.host.endsWith("xola.com")) {
 
   window.addEventListener("load", function(event) { window.setTimeout( function() { 
   
